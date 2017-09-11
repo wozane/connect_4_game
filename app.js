@@ -1,3 +1,17 @@
+function Cell(props) {
+  var stle = {
+    height: 50,
+    width: 50,
+    border: "1px solid black",
+    backgroundColor: "yellow"
+  }
+  return (
+    <div style = {style}>
+      <Circle/>
+    </div>
+  )
+}
+
 function Circle(props){
   var style = {
     backgroundColor: "white",
@@ -7,11 +21,11 @@ function Circle(props){
   }
 
   return (
-    <div stle = {style}></div>
+    <div style = {style}></div>
   )
 }
 
 ReactDOM.render(
-  <Circle/>,
+  <Cell/>,
   document.getElementById('root')
 );
