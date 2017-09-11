@@ -1,3 +1,15 @@
+function Board(props) {
+  var rows = []
+  for (let i = 5; i >= 0; i--) {
+    rows.push(<Row/>)
+  }
+  return (
+    <div>
+     {rows}
+    </div>
+  )
+}
+
 function Row(props) {
   var style = {
     display: "flex"
@@ -41,6 +53,6 @@ function Circle(props){
 }
 
 ReactDOM.render(
-  <Row/>,
+  <Board/>,
   document.getElementById('root')
 );
