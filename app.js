@@ -1,3 +1,18 @@
+class Game extends React.Component{
+  constructor(props){
+    super(props)
+  }
+  render(){
+    return(
+      <div>
+        <h1>Black Turn</h1>
+        <Board/>
+        <button>Restart</button>
+      </div>
+    )
+  }
+}
+
 function Board(props) {
   var rows = []
   for (let i = 5; i >= 0; i--) {
@@ -53,6 +68,6 @@ function Circle(props){
 }
 
 ReactDOM.render(
-  <Board/>,
+  <Game/>,
   document.getElementById('root')
 );
