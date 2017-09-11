@@ -1,3 +1,18 @@
+function Row(props) {
+  var style = {
+    display: "flex"
+  }
+  var cells = []
+  for (let i = 0; i < 7; i++) {
+    cells.push(<Cell/>)
+  }
+  return (
+    <div style = {style}>
+      {cells}
+    </div>
+  )
+}
+
 function Cell(props) {
   var stle = {
     height: 50,
@@ -26,6 +41,6 @@ function Circle(props){
 }
 
 ReactDOM.render(
-  <Cell/>,
+  <Row/>,
   document.getElementById('root')
 );
