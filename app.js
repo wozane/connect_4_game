@@ -4,7 +4,7 @@ class Game extends React.Component{
     super(props)
 
     var cells = []
-    for(let i = 0; i < 6; i++) {
+    for(let i = 0; i < 6; i++){
       cells.push(new Array(7).fill(0))
     }
 
@@ -12,39 +12,47 @@ class Game extends React.Component{
     this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick(){
-    console.log("clicked");
+  handleClick(row,col){
+    console.log("row: " + row + " | col: " + col)
+    console.log(this.state.cells)
+    var temp = [];
+    for(let i = 0; i < 6; i++){
+      temp.push(this.state.cells[i].slice())
+    }
+    temp[row][col] = 1;
+    this.setState({cells:temp})
   }
+
   render(){
-    return(
+    return (
       <div>
         <h1>Black Turn</h1>
-        <Board cells = {this.state.cells} handleClick = {this.handleClick} />
+        <Board cells = {this.state.cells} handleClick = {this.handleClick}/>
         <button>Restart</button>
       </div>
     )
   }
 }
 
-function Board(props) {
+function Board(props){
   var rows = []
-  for (let i = 5; i >= 0; i--) {
-    rows.push(<Row/>)
+  for(let i = 5; i >= 0; i--){
+    rows.push(<Row key = {i} row = {i} cells = {props.cells[i]} handleClick = {props.handleClick} />)
   }
-  return (
+  return(
     <div>
-     {rows}
+      {rows}
     </div>
   )
 }
 
-function Row(props) {
+function Row(props){
   var style = {
     display: "flex"
   }
   var cells = []
-  for (let i = 0; i < 7; i++) {
-    cells.push(<Cell/>)
+  for (let i = 0; i < 7; i++){
+    cells.push(<Cell key = {i} cell = {props.cells[i]} row = {props.row} col = {i} handleClick = {props.handleClick} />)
   }
   return (
     <div style = {style}>
@@ -53,34 +61,42 @@ function Row(props) {
   )
 }
 
-function Cell(props) {
-  var stle = {
-    height: 50,
-    width: 50,
-    border: "1px solid black",
-    backgroundColor: "yellow"
+function Cell(props){
+  var style = {
+      height:50,
+      width:50,
+      border:"1px solid black",
+      backgroundColor:"yellow"
   }
   return (
-    <div style = {style}>
-      <Circle/>
+    <div style = {style} onClick = {() => props.handleClick(props.row,props.col)}>
+        <Circle cell = {props.cell}/>
     </div>
   )
+
 }
 
 function Circle(props){
-  var style = {
-    backgroundColor: "white",
-    border: "1px solid black",
-    borderRadius: "100%",
-    paddingTop: "98%"
-  }
-
-  return (
-    <div style = {style}></div>
-  )
+    var color = "white"
+    if(props.cell == 1){
+        color = "black"
+    }
+    else if(props.cell == 2){
+        color = "red"
+    }
+    var style = {
+        backgroundColor:color,
+        border: "1px solid black",
+        borderRadius: "100%",
+        paddingTop: "98%"
+    }
+    return (
+       <div style = {style}></div>
+    )
 }
 
+
 ReactDOM.render(
-  <Game/>,
-  document.getElementById('root')
+    <Game/>,
+    document.getElementById('root')
 );
